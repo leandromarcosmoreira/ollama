@@ -1,3 +1,8 @@
+> **⚠️ FORK** — Este repositório é um fork de [ollama/ollama](https://github.com/ollama/ollama).
+> Repositório deste fork: [leandromarcosmoreira/ollama](https://github.com/leandromarcosmoreira/ollama)
+
+---
+
 <p align="center">
   <a href="https://ollama.com">
     <img src="https://github.com/ollama/ollama/assets/3325447/0d0b44e2-8f4a-4e99-9b52-a5c1c741c8f7" alt="ollama" width="200"/>
@@ -6,7 +11,7 @@
 
 # Ollama
 
-Start building with open models.
+Comece a construir com modelos de código aberto.
 
 ## Download
 
@@ -16,7 +21,7 @@ Start building with open models.
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-or [download manually](https://ollama.com/download/Ollama.dmg)
+ou [baixe manualmente](https://ollama.com/download/Ollama.dmg)
 
 ### Windows
 
@@ -24,7 +29,7 @@ or [download manually](https://ollama.com/download/Ollama.dmg)
 irm https://ollama.com/install.ps1 | iex
 ```
 
-or [download manually](https://ollama.com/download/OllamaSetup.exe)
+ou [baixe manualmente](https://ollama.com/download/OllamaSetup.exe)
 
 ### Linux
 
@@ -32,77 +37,77 @@ or [download manually](https://ollama.com/download/OllamaSetup.exe)
 curl -fsSL https://ollama.com/install.sh | sh
 ```
 
-[Manual install instructions](https://docs.ollama.com/linux#manual-install)
+[Instruções de instalação manual](https://docs.ollama.com/linux#manual-install)
 
 ### Docker
 
-The official [Ollama Docker image](https://hub.docker.com/r/ollama/ollama) `ollama/ollama` is available on Docker Hub.
+A [imagem Docker oficial do Ollama](https://hub.docker.com/r/ollama/ollama) `ollama/ollama` está disponível no Docker Hub.
 
-### Libraries
+### Bibliotecas
 
 - [ollama-python](https://github.com/ollama/ollama-python)
 - [ollama-js](https://github.com/ollama/ollama-js)
 
-### Community
+### Comunidade
 
 - [Discord](https://discord.gg/ollama)
 - [𝕏 (Twitter)](https://x.com/ollama)
 - [Reddit](https://reddit.com/r/ollama)
 
-## Get started
+## Primeiros Passos
 
 ```
 ollama
 ```
 
-You'll be prompted to run a model or connect Ollama to your existing agents or applications such as `claude`, `codex`, `openclaw` and more.
+Você será solicitado a executar um modelo ou conectar o Ollama aos seus agentes ou aplicações existentes, como `claude`, `codex`, `openclaw` e mais.
 
-### Coding
+### Programação
 
-To launch a specific integration:
+Para iniciar uma integração específica:
 
 ```
 ollama launch claude
 ```
 
-Supported integrations include [Claude Code](https://docs.ollama.com/integrations/claude-code), [Codex](https://docs.ollama.com/integrations/codex), [Droid](https://docs.ollama.com/integrations/droid), and [OpenCode](https://docs.ollama.com/integrations/opencode).
+As integrações suportadas incluem [Claude Code](https://docs.ollama.com/integrations/claude-code), [Codex](https://docs.ollama.com/integrations/codex), [Droid](https://docs.ollama.com/integrations/droid) e [OpenCode](https://docs.ollama.com/integrations/opencode).
 
-### AI assistant
+### Assistente de IA
 
-Use [OpenClaw](https://docs.ollama.com/integrations/openclaw) to turn Ollama into a personal AI assistant across WhatsApp, Telegram, Slack, Discord, and more:
+Use o [OpenClaw](https://docs.ollama.com/integrations/openclaw) para transformar o Ollama em um assistente de IA pessoal no WhatsApp, Telegram, Slack, Discord e muito mais:
 
 ```
 ollama launch openclaw
 ```
 
-### Chat with a model
+### Conversar com um Modelo
 
-Run and chat with [Gemma 3](https://ollama.com/library/gemma3):
+Execute e converse com o [Gemma 3](https://ollama.com/library/gemma3):
 
 ```
 ollama run gemma3
 ```
 
-See [ollama.com/library](https://ollama.com/library) for the full list.
+Veja [ollama.com/library](https://ollama.com/library) para a lista completa.
 
-See the [quickstart guide](https://docs.ollama.com/quickstart) for more details.
+Veja o [guia de início rápido](https://docs.ollama.com/quickstart) para mais detalhes.
 
-## REST API
+## API REST
 
-Ollama has a REST API for running and managing models.
+O Ollama possui uma API REST para executar e gerenciar modelos.
 
 ```
 curl http://localhost:11434/api/chat -d '{
   "model": "gemma3",
   "messages": [{
     "role": "user",
-    "content": "Why is the sky blue?"
+    "content": "Por que o céu é azul?"
   }],
   "stream": false
 }'
 ```
 
-See the [API documentation](https://docs.ollama.com/api) for all endpoints.
+Veja a [documentação da API](https://docs.ollama.com/api) para todos os endpoints.
 
 ### Python
 
@@ -116,7 +121,7 @@ from ollama import chat
 response = chat(model='gemma3', messages=[
   {
     'role': 'user',
-    'content': 'Why is the sky blue?',
+    'content': 'Por que o céu é azul?',
   },
 ])
 print(response.message.content)
@@ -133,224 +138,224 @@ import ollama from "ollama";
 
 const response = await ollama.chat({
   model: "gemma3",
-  messages: [{ role: "user", content: "Why is the sky blue?" }],
+  messages: [{ role: "user", content: "Por que o céu é azul?" }],
 });
 console.log(response.message.content);
 ```
 
-## Supported backends
+## Backends Suportados
 
-- [llama.cpp](https://github.com/ggml-org/llama.cpp) project founded by Georgi Gerganov.
+- Projeto [llama.cpp](https://github.com/ggml-org/llama.cpp) fundado por Georgi Gerganov.
 
-## Documentation
+## Documentação
 
-- [CLI reference](https://docs.ollama.com/cli)
-- [REST API reference](https://docs.ollama.com/api)
-- [Importing models](https://docs.ollama.com/import)
-- [Modelfile reference](https://docs.ollama.com/modelfile)
-- [Building from source](https://github.com/ollama/ollama/blob/main/docs/development.md)
+- [Referência da CLI](https://docs.ollama.com/cli)
+- [Referência da API REST](https://docs.ollama.com/api)
+- [Importando modelos](https://docs.ollama.com/import)
+- [Referência do Modelfile](https://docs.ollama.com/modelfile)
+- [Compilando a partir do código-fonte](https://github.com/ollama/ollama/blob/main/docs/development.md)
 
-## Community Integrations
+## Integrações da Comunidade
 
-> Want to add your project? Open a pull request.
+> Quer adicionar seu projeto? Abra um pull request no repositório original.
 
-### Chat Interfaces
+### Interfaces de Chat
 
 #### Web
 
-- [Open WebUI](https://github.com/open-webui/open-webui) - Extensible, self-hosted AI interface
-- [Onyx](https://github.com/onyx-dot-app/onyx) - Connected AI workspace
-- [LibreChat](https://github.com/danny-avila/LibreChat) - Enhanced ChatGPT clone with multi-provider support
-- [Lobe Chat](https://github.com/lobehub/lobe-chat) - Modern chat framework with plugin ecosystem ([docs](https://lobehub.com/docs/self-hosting/examples/ollama))
-- [NextChat](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) - Cross-platform ChatGPT UI ([docs](https://docs.nextchat.dev/models/ollama))
-- [Perplexica](https://github.com/ItzCrazyKns/Perplexica) - AI-powered search engine, open-source Perplexity alternative
-- [big-AGI](https://github.com/enricoros/big-AGI) - AI suite for professionals
-- [Lollms WebUI](https://github.com/ParisNeo/lollms-webui) - Multi-model web interface
-- [ChatOllama](https://github.com/sugarforever/chat-ollama) - Chatbot with knowledge bases
-- [Bionic GPT](https://github.com/bionic-gpt/bionic-gpt) - On-premise AI platform
-- [Chatbot UI](https://github.com/ivanfioravanti/chatbot-ollama) - ChatGPT-style web interface
-- [Hollama](https://github.com/fmaclen/hollama) - Minimal web interface
-- [Chatbox](https://github.com/Bin-Huang/Chatbox) - Desktop and web AI client
-- [chat](https://github.com/swuecho/chat) - Chat web app for teams
-- [Ollama RAG Chatbot](https://github.com/datvodinh/rag-chatbot.git) - Chat with multiple PDFs using RAG
-- [Tkinter-based client](https://github.com/chyok/ollama-gui) - Python desktop client
+- [Open WebUI](https://github.com/open-webui/open-webui) - Interface de IA extensível e auto-hospedada
+- [Onyx](https://github.com/onyx-dot-app/onyx) - Espaço de trabalho de IA conectado
+- [LibreChat](https://github.com/danny-avila/LibreChat) - Clone aprimorado do ChatGPT com suporte a múltiplos provedores
+- [Lobe Chat](https://github.com/lobehub/lobe-chat) - Framework de chat moderno com ecossistema de plugins ([docs](https://lobehub.com/docs/self-hosting/examples/ollama))
+- [NextChat](https://github.com/ChatGPTNextWeb/ChatGPT-Next-Web) - UI do ChatGPT multiplataforma ([docs](https://docs.nextchat.dev/models/ollama))
+- [Perplexica](https://github.com/ItzCrazyKns/Perplexica) - Motor de busca com IA, alternativa open-source ao Perplexity
+- [big-AGI](https://github.com/enricoros/big-AGI) - Suite de IA para profissionais
+- [Lollms WebUI](https://github.com/ParisNeo/lollms-webui) - Interface web multi-modelo
+- [ChatOllama](https://github.com/sugarforever/chat-ollama) - Chatbot com bases de conhecimento
+- [Bionic GPT](https://github.com/bionic-gpt/bionic-gpt) - Plataforma de IA on-premise
+- [Chatbot UI](https://github.com/ivanfioravanti/chatbot-ollama) - Interface web estilo ChatGPT
+- [Hollama](https://github.com/fmaclen/hollama) - Interface web minimalista
+- [Chatbox](https://github.com/Bin-Huang/Chatbox) - Cliente de IA para desktop e web
+- [chat](https://github.com/swuecho/chat) - Aplicativo de chat para equipes
+- [Ollama RAG Chatbot](https://github.com/datvodinh/rag-chatbot.git) - Chat com múltiplos PDFs usando RAG
+- [Cliente baseado em Tkinter](https://github.com/chyok/ollama-gui) - Cliente desktop Python
 
 #### Desktop
 
-- [Dify.AI](https://github.com/langgenius/dify) - LLM app development platform
-- [AnythingLLM](https://github.com/Mintplex-Labs/anything-llm) - All-in-one AI app for Mac, Windows, and Linux
-- [Maid](https://github.com/Mobile-Artificial-Intelligence/maid) - Cross-platform mobile and desktop client
-- [Witsy](https://github.com/nbonamy/witsy) - AI desktop app for Mac, Windows, and Linux
-- [Cherry Studio](https://github.com/kangfenmao/cherry-studio) - Multi-provider desktop client
-- [Ollama App](https://github.com/JHubi1/ollama-app) - Multi-platform client for desktop and mobile
-- [PyGPT](https://github.com/szczyglis-dev/py-gpt) - AI desktop assistant for Linux, Windows, and Mac
-- [Alpaca](https://github.com/Jeffser/Alpaca) - GTK4 client for Linux and macOS
-- [SwiftChat](https://github.com/aws-samples/swift-chat) - Cross-platform including iOS, Android, and Apple Vision Pro
-- [Enchanted](https://github.com/AugustDev/enchanted) - Native macOS and iOS client
-- [RWKV-Runner](https://github.com/josStorer/RWKV-Runner) - Multi-model desktop runner
-- [Ollama Grid Search](https://github.com/dezoito/ollama-grid-search) - Evaluate and compare models
-- [macai](https://github.com/Renset/macai) - macOS client for Ollama and ChatGPT
-- [AI Studio](https://github.com/MindWorkAI/AI-Studio) - Multi-provider desktop IDE
-- [Reins](https://github.com/ibrahimcetin/reins) - Parameter tuning and reasoning model support
-- [ConfiChat](https://github.com/1runeberg/confichat) - Privacy-focused with optional encryption
-- [LLocal.in](https://github.com/kartikm7/llocal) - Electron desktop client
-- [MindMac](https://mindmac.app) - AI chat client for Mac
-- [Msty](https://msty.app) - Multi-model desktop client
-- [BoltAI for Mac](https://boltai.com) - AI chat client for Mac
-- [IntelliBar](https://intellibar.app/) - AI-powered assistant for macOS
-- [Kerlig AI](https://www.kerlig.com/) - AI writing assistant for macOS
-- [Hillnote](https://hillnote.com) - Markdown-first AI workspace
-- [Perfect Memory AI](https://www.perfectmemory.ai/) - Productivity AI personalized by screen and meeting history
+- [Dify.AI](https://github.com/langgenius/dify) - Plataforma de desenvolvimento de aplicativos LLM
+- [AnythingLLM](https://github.com/Mintplex-Labs/anything-llm) - Aplicativo de IA tudo-em-um para Mac, Windows e Linux
+- [Maid](https://github.com/Mobile-Artificial-Intelligence/maid) - Cliente multiplataforma para mobile e desktop
+- [Witsy](https://github.com/nbonamy/witsy) - Aplicativo de IA para desktop no Mac, Windows e Linux
+- [Cherry Studio](https://github.com/kangfenmao/cherry-studio) - Cliente desktop multi-provedor
+- [Ollama App](https://github.com/JHubi1/ollama-app) - Cliente multiplataforma para desktop e mobile
+- [PyGPT](https://github.com/szczyglis-dev/py-gpt) - Assistente de IA para desktop no Linux, Windows e Mac
+- [Alpaca](https://github.com/Jeffser/Alpaca) - Cliente GTK4 para Linux e macOS
+- [SwiftChat](https://github.com/aws-samples/swift-chat) - Multiplataforma incluindo iOS, Android e Apple Vision Pro
+- [Enchanted](https://github.com/AugustDev/enchanted) - Cliente nativo para macOS e iOS
+- [RWKV-Runner](https://github.com/josStorer/RWKV-Runner) - Executor de múltiplos modelos para desktop
+- [Ollama Grid Search](https://github.com/dezoito/ollama-grid-search) - Avaliar e comparar modelos
+- [macai](https://github.com/Renset/macai) - Cliente macOS para Ollama e ChatGPT
+- [AI Studio](https://github.com/MindWorkAI/AI-Studio) - IDE de desktop multi-provedor
+- [Reins](https://github.com/ibrahimcetin/reins) - Ajuste de parâmetros e suporte a modelos de raciocínio
+- [ConfiChat](https://github.com/1runeberg/confichat) - Focado em privacidade com criptografia opcional
+- [LLocal.in](https://github.com/kartikm7/llocal) - Cliente desktop Electron
+- [MindMac](https://mindmac.app) - Cliente de chat de IA para Mac
+- [Msty](https://msty.app) - Cliente desktop multi-modelo
+- [BoltAI para Mac](https://boltai.com) - Cliente de chat de IA para Mac
+- [IntelliBar](https://intellibar.app/) - Assistente com IA para macOS
+- [Kerlig AI](https://www.kerlig.com/) - Assistente de escrita com IA para macOS
+- [Hillnote](https://hillnote.com) - Espaço de trabalho de IA com foco em Markdown
+- [Perfect Memory AI](https://www.perfectmemory.ai/) - IA de produtividade personalizada por histórico de tela e reuniões
 
 #### Mobile
 
-- [Ollama Android Chat](https://github.com/sunshine0523/OllamaServer) - One-click Ollama on Android
+- [Ollama Android Chat](https://github.com/sunshine0523/OllamaServer) - Ollama com um clique no Android
 
-> SwiftChat, Enchanted, Maid, Ollama App, Reins, and ConfiChat listed above also support mobile platforms.
+> SwiftChat, Enchanted, Maid, Ollama App, Reins e ConfiChat listados acima também suportam plataformas móveis.
 
-### Code Editors & Development
+### Editores de Código e Desenvolvimento
 
-- [Cline](https://github.com/cline/cline) - VS Code extension for multi-file/whole-repo coding
-- [Continue](https://github.com/continuedev/continue) - Open-source AI code assistant for any IDE
-- [Void](https://github.com/voideditor/void) - Open source AI code editor, Cursor alternative
-- [Copilot for Obsidian](https://github.com/logancyang/obsidian-copilot) - AI assistant for Obsidian
-- [twinny](https://github.com/rjmacarthy/twinny) - Copilot and Copilot chat alternative
-- [gptel Emacs client](https://github.com/karthink/gptel) - LLM client for Emacs
-- [Ollama Copilot](https://github.com/bernardo-bruning/ollama-copilot) - Use Ollama as GitHub Copilot
-- [Obsidian Local GPT](https://github.com/pfrankov/obsidian-local-gpt) - Local AI for Obsidian
-- [Ellama Emacs client](https://github.com/s-kostyaev/ellama) - LLM tool for Emacs
-- [orbiton](https://github.com/xyproto/orbiton) - Config-free text editor with Ollama tab completion
-- [AI ST Completion](https://github.com/yaroslavyaroslav/OpenAI-sublime-text) - Sublime Text 4 AI assistant
-- [VT Code](https://github.com/vinhnx/vtcode) - Rust-based terminal coding agent with Tree-sitter
-- [QodeAssist](https://github.com/Palm1r/QodeAssist) - AI coding assistant for Qt Creator
-- [AI Toolkit for VS Code](https://aka.ms/ai-tooklit/ollama-docs) - Microsoft-official VS Code extension
-- [Open Interpreter](https://docs.openinterpreter.com/language-model-setup/local-models/ollama) - Natural language interface for computers
+- [Cline](https://github.com/cline/cline) - Extensão VS Code para codificação multi-arquivo/repositório completo
+- [Continue](https://github.com/continuedev/continue) - Assistente de código de IA open-source para qualquer IDE
+- [Void](https://github.com/voideditor/void) - Editor de código de IA open-source, alternativa ao Cursor
+- [Copilot para Obsidian](https://github.com/logancyang/obsidian-copilot) - Assistente de IA para Obsidian
+- [twinny](https://github.com/rjmacarthy/twinny) - Alternativa ao Copilot e Copilot chat
+- [gptel cliente Emacs](https://github.com/karthink/gptel) - Cliente LLM para Emacs
+- [Ollama Copilot](https://github.com/bernardo-bruning/ollama-copilot) - Use o Ollama como GitHub Copilot
+- [Obsidian Local GPT](https://github.com/pfrankov/obsidian-local-gpt) - IA local para Obsidian
+- [Ellama cliente Emacs](https://github.com/s-kostyaev/ellama) - Ferramenta LLM para Emacs
+- [orbiton](https://github.com/xyproto/orbiton) - Editor de texto sem configuração com autocompletar Ollama
+- [AI ST Completion](https://github.com/yaroslavyaroslav/OpenAI-sublime-text) - Assistente de IA para Sublime Text 4
+- [VT Code](https://github.com/vinhnx/vtcode) - Agente de codificação terminal baseado em Rust com Tree-sitter
+- [QodeAssist](https://github.com/Palm1r/QodeAssist) - Assistente de codificação de IA para Qt Creator
+- [AI Toolkit para VS Code](https://aka.ms/ai-tooklit/ollama-docs) - Extensão VS Code oficial da Microsoft
+- [Open Interpreter](https://docs.openinterpreter.com/language-model-setup/local-models/ollama) - Interface em linguagem natural para computadores
 
-### Libraries & SDKs
+### Bibliotecas e SDKs
 
-- [LiteLLM](https://github.com/BerriAI/litellm) - Unified API for 100+ LLM providers
-- [Semantic Kernel](https://github.com/microsoft/semantic-kernel/tree/main/python/semantic_kernel/connectors/ai/ollama) - Microsoft AI orchestration SDK
-- [LangChain4j](https://github.com/langchain4j/langchain4j) - Java LangChain ([example](https://github.com/langchain4j/langchain4j-examples/tree/main/ollama-examples/src/main/java))
-- [LangChainGo](https://github.com/tmc/langchaingo/) - Go LangChain ([example](https://github.com/tmc/langchaingo/tree/main/examples/ollama-completion-example))
-- [Spring AI](https://github.com/spring-projects/spring-ai) - Spring framework AI support ([docs](https://docs.spring.io/spring-ai/reference/api/chat/ollama-chat.html))
-- [LangChain](https://python.langchain.com/docs/integrations/chat/ollama/) and [LangChain.js](https://js.langchain.com/docs/integrations/chat/ollama/) with [example](https://js.langchain.com/docs/tutorials/local_rag/)
-- [Ollama for Ruby](https://github.com/crmne/ruby_llm) - Ruby LLM library
-- [any-llm](https://github.com/mozilla-ai/any-llm) - Unified LLM interface by Mozilla
-- [OllamaSharp for .NET](https://github.com/awaescher/OllamaSharp) - .NET SDK
-- [LangChainRust](https://github.com/Abraxas-365/langchain-rust) - Rust LangChain ([example](https://github.com/Abraxas-365/langchain-rust/blob/main/examples/llm_ollama.rs))
-- [Agents-Flex for Java](https://github.com/agents-flex/agents-flex) - Java agent framework ([example](https://github.com/agents-flex/agents-flex/tree/main/agents-flex-llm/agents-flex-llm-ollama/src/test/java/com/agentsflex/llm/ollama))
-- [Elixir LangChain](https://github.com/brainlid/langchain) - Elixir LangChain
-- [Ollama-rs for Rust](https://github.com/pepperoni21/ollama-rs) - Rust SDK
-- [LangChain for .NET](https://github.com/tryAGI/LangChain) - .NET LangChain ([example](https://github.com/tryAGI/LangChain/blob/main/examples/LangChain.Samples.OpenAI/Program.cs))
-- [chromem-go](https://github.com/philippgille/chromem-go) - Go vector database with Ollama embeddings ([example](https://github.com/philippgille/chromem-go/tree/v0.5.0/examples/rag-wikipedia-ollama))
-- [LangChainDart](https://github.com/davidmigloz/langchain_dart) - Dart LangChain
-- [LlmTornado](https://github.com/lofcz/llmtornado) - Unified C# interface for multiple inference APIs
-- [Ollama4j for Java](https://github.com/ollama4j/ollama4j) - Java SDK
-- [Ollama for Laravel](https://github.com/cloudstudio/ollama-laravel) - Laravel integration
-- [Ollama for Swift](https://github.com/mattt/ollama-swift) - Swift SDK
-- [LlamaIndex](https://docs.llamaindex.ai/en/stable/examples/llm/ollama/) and [LlamaIndexTS](https://ts.llamaindex.ai/modules/llms/available_llms/ollama) - Data framework for LLM apps
-- [Haystack](https://github.com/deepset-ai/haystack-integrations/blob/main/integrations/ollama.md) - AI pipeline framework
-- [Firebase Genkit](https://firebase.google.com/docs/genkit/plugins/ollama) - Google AI framework
-- [Ollama-hpp for C++](https://github.com/jmont-dev/ollama-hpp) - C++ SDK
-- [PromptingTools.jl](https://github.com/svilupp/PromptingTools.jl) - Julia LLM toolkit ([example](https://svilupp.github.io/PromptingTools.jl/dev/examples/working_with_ollama))
-- [Ollama for R - rollama](https://github.com/JBGruber/rollama) - R SDK
-- [Portkey](https://portkey.ai/docs/welcome/integration-guides/ollama) - AI gateway
-- [Testcontainers](https://testcontainers.com/modules/ollama/) - Container-based testing
-- [LLPhant](https://github.com/theodo-group/LLPhant?tab=readme-ov-file#ollama) - PHP AI framework
+- [LiteLLM](https://github.com/BerriAI/litellm) - API unificada para mais de 100 provedores LLM
+- [Semantic Kernel](https://github.com/microsoft/semantic-kernel/tree/main/python/semantic_kernel/connectors/ai/ollama) - SDK de orquestração de IA da Microsoft
+- [LangChain4j](https://github.com/langchain4j/langchain4j) - LangChain para Java
+- [LangChainGo](https://github.com/tmc/langchaingo/) - LangChain para Go
+- [Spring AI](https://github.com/spring-projects/spring-ai) - Suporte de IA para o framework Spring
+- [LangChain](https://python.langchain.com/docs/integrations/chat/ollama/) e [LangChain.js](https://js.langchain.com/docs/integrations/chat/ollama/)
+- [Ollama para Ruby](https://github.com/crmne/ruby_llm) - Biblioteca LLM para Ruby
+- [any-llm](https://github.com/mozilla-ai/any-llm) - Interface LLM unificada pela Mozilla
+- [OllamaSharp para .NET](https://github.com/awaescher/OllamaSharp) - SDK .NET
+- [LangChainRust](https://github.com/Abraxas-365/langchain-rust) - LangChain para Rust
+- [Agents-Flex para Java](https://github.com/agents-flex/agents-flex) - Framework de agentes Java
+- [Elixir LangChain](https://github.com/brainlid/langchain) - LangChain para Elixir
+- [Ollama-rs para Rust](https://github.com/pepperoni21/ollama-rs) - SDK Rust
+- [LangChain para .NET](https://github.com/tryAGI/LangChain) - LangChain para .NET
+- [chromem-go](https://github.com/philippgille/chromem-go) - Banco de dados vetorial Go com embeddings Ollama
+- [LangChainDart](https://github.com/davidmigloz/langchain_dart) - LangChain para Dart
+- [LlmTornado](https://github.com/lofcz/llmtornado) - Interface C# unificada para múltiplas APIs de inferência
+- [Ollama4j para Java](https://github.com/ollama4j/ollama4j) - SDK Java
+- [Ollama para Laravel](https://github.com/cloudstudio/ollama-laravel) - Integração com Laravel
+- [Ollama para Swift](https://github.com/mattt/ollama-swift) - SDK Swift
+- [LlamaIndex](https://docs.llamaindex.ai/en/stable/examples/llm/ollama/) e [LlamaIndexTS](https://ts.llamaindex.ai/modules/llms/available_llms/ollama) - Framework de dados para apps LLM
+- [Haystack](https://github.com/deepset-ai/haystack-integrations/blob/main/integrations/ollama.md) - Framework de pipeline de IA
+- [Firebase Genkit](https://firebase.google.com/docs/genkit/plugins/ollama) - Framework de IA do Google
+- [Ollama-hpp para C++](https://github.com/jmont-dev/ollama-hpp) - SDK C++
+- [PromptingTools.jl](https://github.com/svilupp/PromptingTools.jl) - Toolkit LLM para Julia
+- [Ollama para R - rollama](https://github.com/JBGruber/rollama) - SDK R
+- [Portkey](https://portkey.ai/docs/welcome/integration-guides/ollama) - Gateway de IA
+- [Testcontainers](https://testcontainers.com/modules/ollama/) - Testes baseados em contêineres
+- [LLPhant](https://github.com/theodo-group/LLPhant?tab=readme-ov-file#ollama) - Framework de IA PHP
 
-### Frameworks & Agents
+### Frameworks e Agentes
 
-- [AutoGPT](https://github.com/Significant-Gravitas/AutoGPT/blob/master/docs/content/platform/ollama.md) - Autonomous AI agent platform
-- [crewAI](https://github.com/crewAIInc/crewAI) - Multi-agent orchestration framework
-- [Strands Agents](https://github.com/strands-agents/sdk-python) - Model-driven agent building by AWS
-- [Cheshire Cat](https://github.com/cheshire-cat-ai/core) - AI assistant framework
-- [any-agent](https://github.com/mozilla-ai/any-agent) - Unified agent framework interface by Mozilla
-- [Stakpak](https://github.com/stakpak/agent) - Open source DevOps agent
-- [Hexabot](https://github.com/hexastack/hexabot) - Conversational AI builder
-- [Neuro SAN](https://github.com/cognizant-ai-lab/neuro-san-studio) - Multi-agent orchestration ([docs](https://github.com/cognizant-ai-lab/neuro-san-studio/blob/main/docs/user_guide.md#ollama))
+- [AutoGPT](https://github.com/Significant-Gravitas/AutoGPT/blob/master/docs/content/platform/ollama.md) - Plataforma de agentes de IA autônomos
+- [crewAI](https://github.com/crewAIInc/crewAI) - Framework de orquestração multi-agente
+- [Strands Agents](https://github.com/strands-agents/sdk-python) - Construção de agentes orientada a modelos pela AWS
+- [Cheshire Cat](https://github.com/cheshire-cat-ai/core) - Framework de assistente de IA
+- [any-agent](https://github.com/mozilla-ai/any-agent) - Interface unificada de framework de agentes pela Mozilla
+- [Stakpak](https://github.com/stakpak/agent) - Agente DevOps open-source
+- [Hexabot](https://github.com/hexastack/hexabot) - Construtor de IA conversacional
+- [Neuro SAN](https://github.com/cognizant-ai-lab/neuro-san-studio) - Orquestração multi-agente
 
-### RAG & Knowledge Bases
+### RAG e Bases de Conhecimento
 
-- [RAGFlow](https://github.com/infiniflow/ragflow) - RAG engine based on deep document understanding
-- [R2R](https://github.com/SciPhi-AI/R2R) - Open-source RAG engine
-- [MaxKB](https://github.com/1Panel-dev/MaxKB/) - Ready-to-use RAG chatbot
-- [Minima](https://github.com/dmayboroda/minima) - On-premises or fully local RAG
-- [Chipper](https://github.com/TilmanGriesel/chipper) - AI interface with Haystack RAG
-- [ARGO](https://github.com/xark-argo/argo) - RAG and deep research on Mac/Windows/Linux
-- [Archyve](https://github.com/nickthecook/archyve) - RAG-enabling document library
-- [Casibase](https://casibase.org) - AI knowledge base with RAG and SSO
-- [BrainSoup](https://www.nurgo-software.com/products/brainsoup) - Native client with RAG and multi-agent automation
+- [RAGFlow](https://github.com/infiniflow/ragflow) - Motor RAG baseado em compreensão profunda de documentos
+- [R2R](https://github.com/SciPhi-AI/R2R) - Motor RAG open-source
+- [MaxKB](https://github.com/1Panel-dev/MaxKB/) - Chatbot RAG pronto para uso
+- [Minima](https://github.com/dmayboroda/minima) - RAG on-premises ou totalmente local
+- [Chipper](https://github.com/TilmanGriesel/chipper) - Interface de IA com RAG Haystack
+- [ARGO](https://github.com/xark-argo/argo) - RAG e pesquisa profunda no Mac/Windows/Linux
+- [Archyve](https://github.com/nickthecook/archyve) - Biblioteca de documentos habilitada para RAG
+- [Casibase](https://casibase.org) - Base de conhecimento de IA com RAG e SSO
+- [BrainSoup](https://www.nurgo-software.com/products/brainsoup) - Cliente nativo com RAG e automação multi-agente
 
-### Bots & Messaging
+### Bots e Mensagens
 
-- [LangBot](https://github.com/RockChinQ/LangBot) - Multi-platform messaging bots with agents and RAG
-- [AstrBot](https://github.com/Soulter/AstrBot/) - Multi-platform chatbot with RAG and plugins
-- [Discord-Ollama Chat Bot](https://github.com/kevinthedang/discord-ollama) - TypeScript Discord bot
-- [Ollama Telegram Bot](https://github.com/ruecat/ollama-telegram) - Telegram bot
-- [LLM Telegram Bot](https://github.com/innightwolfsleep/llm_telegram_bot) - Telegram bot for roleplay
+- [LangBot](https://github.com/RockChinQ/LangBot) - Bots de mensagens multiplataforma com agentes e RAG
+- [AstrBot](https://github.com/Soulter/AstrBot/) - Chatbot multiplataforma com RAG e plugins
+- [Discord-Ollama Chat Bot](https://github.com/kevinthedang/discord-ollama) - Bot Discord em TypeScript
+- [Ollama Telegram Bot](https://github.com/ruecat/ollama-telegram) - Bot Telegram
+- [LLM Telegram Bot](https://github.com/innightwolfsleep/llm_telegram_bot) - Bot Telegram para roleplay
 
-### Terminal & CLI
+### Terminal e CLI
 
-- [aichat](https://github.com/sigoden/aichat) - All-in-one LLM CLI with Shell Assistant, RAG, and AI tools
-- [oterm](https://github.com/ggozad/oterm) - Terminal client for Ollama
-- [gollama](https://github.com/sammcj/gollama) - Go-based model manager for Ollama
-- [tlm](https://github.com/yusufcanb/tlm) - Local shell copilot
-- [tenere](https://github.com/pythops/tenere) - TUI for LLMs
-- [ParLlama](https://github.com/paulrobello/parllama) - TUI for Ollama
-- [llm-ollama](https://github.com/taketwo/llm-ollama) - Plugin for [Datasette's LLM CLI](https://llm.datasette.io/en/stable/)
-- [ShellOracle](https://github.com/djcopley/ShellOracle) - Shell command suggestions
-- [LLM-X](https://github.com/mrdjohnson/llm-x) - Progressive web app for LLMs
-- [cmdh](https://github.com/pgibler/cmdh) - Natural language to shell commands
-- [VT](https://github.com/vinhnx/vt.ai) - Minimal multimodal AI chat app
+- [aichat](https://github.com/sigoden/aichat) - CLI LLM completo com Assistente Shell, RAG e ferramentas de IA
+- [oterm](https://github.com/ggozad/oterm) - Cliente terminal para Ollama
+- [gollama](https://github.com/sammcj/gollama) - Gerenciador de modelos baseado em Go para Ollama
+- [tlm](https://github.com/yusufcanb/tlm) - Copiloto de shell local
+- [tenere](https://github.com/pythops/tenere) - TUI para LLMs
+- [ParLlama](https://github.com/paulrobello/parllama) - TUI para Ollama
+- [llm-ollama](https://github.com/taketwo/llm-ollama) - Plugin para [CLI LLM do Datasette](https://llm.datasette.io/en/stable/)
+- [ShellOracle](https://github.com/djcopley/ShellOracle) - Sugestões de comandos shell
+- [LLM-X](https://github.com/mrdjohnson/llm-x) - Aplicativo web progressivo para LLMs
+- [cmdh](https://github.com/pgibler/cmdh) - Linguagem natural para comandos shell
+- [VT](https://github.com/vinhnx/vt.ai) - Aplicativo de chat de IA multimodal minimalista
 
-### Productivity & Apps
+### Produtividade e Aplicativos
 
-- [AppFlowy](https://github.com/AppFlowy-IO/AppFlowy) - AI collaborative workspace, self-hostable Notion alternative
-- [Screenpipe](https://github.com/mediar-ai/screenpipe) - 24/7 screen and mic recording with AI-powered search
-- [Vibe](https://github.com/thewh1teagle/vibe) - Transcribe and analyze meetings
-- [Page Assist](https://github.com/n4ze3m/page-assist) - Chrome extension for AI-powered browsing
-- [NativeMind](https://github.com/NativeMindBrowser/NativeMindExtension) - Private, on-device browser AI assistant
-- [Ollama Fortress](https://github.com/ParisNeo/ollama_proxy_server) - Security proxy for Ollama
-- [1Panel](https://github.com/1Panel-dev/1Panel/) - Web-based Linux server management
-- [Writeopia](https://github.com/Writeopia/Writeopia) - Text editor with Ollama integration
-- [QA-Pilot](https://github.com/reid41/QA-Pilot) - GitHub code repository understanding
-- [Raycast extension](https://github.com/MassimilianoPasquini97/raycast_ollama) - Ollama in Raycast
-- [Painting Droid](https://github.com/mateuszmigas/painting-droid) - Painting app with AI integrations
-- [Serene Pub](https://github.com/doolijb/serene-pub) - AI roleplaying app
-- [Mayan EDMS](https://gitlab.com/mayan-edms/mayan-edms) - Document management with Ollama workflows
-- [TagSpaces](https://www.tagspaces.org) - File management with [AI tagging](https://docs.tagspaces.org/ai/)
+- [AppFlowy](https://github.com/AppFlowy-IO/AppFlowy) - Espaço de trabalho colaborativo com IA, alternativa auto-hospedável ao Notion
+- [Screenpipe](https://github.com/mediar-ai/screenpipe) - Gravação 24/7 de tela e microfone com busca por IA
+- [Vibe](https://github.com/thewh1teagle/vibe) - Transcrever e analisar reuniões
+- [Page Assist](https://github.com/n4ze3m/page-assist) - Extensão Chrome para navegação com IA
+- [NativeMind](https://github.com/NativeMindBrowser/NativeMindExtension) - Assistente de navegador privado e no dispositivo
+- [Ollama Fortress](https://github.com/ParisNeo/ollama_proxy_server) - Proxy de segurança para Ollama
+- [1Panel](https://github.com/1Panel-dev/1Panel/) - Gerenciamento de servidor Linux baseado na web
+- [Writeopia](https://github.com/Writeopia/Writeopia) - Editor de texto com integração Ollama
+- [QA-Pilot](https://github.com/reid41/QA-Pilot) - Compreensão de repositório de código GitHub
+- [Extensão Raycast](https://github.com/MassimilianoPasquini97/raycast_ollama) - Ollama no Raycast
+- [Painting Droid](https://github.com/mateuszmigas/painting-droid) - Aplicativo de pintura com integrações de IA
+- [Serene Pub](https://github.com/doolijb/serene-pub) - Aplicativo de roleplay com IA
+- [Mayan EDMS](https://gitlab.com/mayan-edms/mayan-edms) - Gerenciamento de documentos com fluxos de trabalho Ollama
+- [TagSpaces](https://www.tagspaces.org) - Gerenciamento de arquivos com [marcação por IA](https://docs.tagspaces.org/ai/)
 
-### Observability & Monitoring
+### Observabilidade e Monitoramento
 
-- [Opik](https://www.comet.com/docs/opik/cookbook/ollama) - Debug, evaluate, and monitor LLM applications
-- [OpenLIT](https://github.com/openlit/openlit) - OpenTelemetry-native monitoring for Ollama and GPUs
-- [Lunary](https://lunary.ai/docs/integrations/ollama) - LLM observability with analytics and PII masking
-- [Langfuse](https://langfuse.com/docs/integrations/ollama) - Open source LLM observability
-- [HoneyHive](https://docs.honeyhive.ai/integrations/ollama) - AI observability and evaluation for agents
-- [MLflow Tracing](https://mlflow.org/docs/latest/llms/tracing/index.html#automatic-tracing) - Open source LLM observability
+- [Opik](https://www.comet.com/docs/opik/cookbook/ollama) - Depurar, avaliar e monitorar aplicativos LLM
+- [OpenLIT](https://github.com/openlit/openlit) - Monitoramento nativo OpenTelemetry para Ollama e GPUs
+- [Lunary](https://lunary.ai/docs/integrations/ollama) - Observabilidade LLM com análises e mascaramento de PII
+- [Langfuse](https://langfuse.com/docs/integrations/ollama) - Observabilidade LLM open-source
+- [HoneyHive](https://docs.honeyhive.ai/integrations/ollama) - Observabilidade e avaliação de IA para agentes
+- [MLflow Tracing](https://mlflow.org/docs/latest/llms/tracing/index.html#automatic-tracing) - Observabilidade LLM open-source
 
-### Database & Embeddings
+### Banco de Dados e Embeddings
 
-- [pgai](https://github.com/timescale/pgai) - PostgreSQL as a vector database ([guide](https://github.com/timescale/pgai/blob/main/docs/vectorizer-quick-start.md))
-- [MindsDB](https://github.com/mindsdb/mindsdb/blob/staging/mindsdb/integrations/handlers/ollama_handler/README.md) - Connect Ollama with 200+ data platforms
-- [chromem-go](https://github.com/philippgille/chromem-go/blob/v0.5.0/embed_ollama.go) - Embeddable vector database for Go ([example](https://github.com/philippgille/chromem-go/tree/v0.5.0/examples/rag-wikipedia-ollama))
-- [Kangaroo](https://github.com/dbkangaroo/kangaroo) - AI-powered SQL client
+- [pgai](https://github.com/timescale/pgai) - PostgreSQL como banco de dados vetorial
+- [MindsDB](https://github.com/mindsdb/mindsdb/blob/staging/mindsdb/integrations/handlers/ollama_handler/README.md) - Conecte o Ollama com mais de 200 plataformas de dados
+- [chromem-go](https://github.com/philippgille/chromem-go/blob/v0.5.0/embed_ollama.go) - Banco de dados vetorial incorporável para Go
+- [Kangaroo](https://github.com/dbkangaroo/kangaroo) - Cliente SQL com IA
 
-### Infrastructure & Deployment
+### Infraestrutura e Implantação
 
-#### Cloud
+#### Nuvem
 
 - [Google Cloud](https://cloud.google.com/run/docs/tutorials/gpu-gemma2-with-ollama)
 - [Fly.io](https://fly.io/docs/python/do-more/add-ollama/)
 - [Koyeb](https://www.koyeb.com/deploy/ollama)
-- [Harbor](https://github.com/av/harbor) - Containerized LLM toolkit with Ollama as default backend
+- [Harbor](https://github.com/av/harbor) - Toolkit LLM em contêineres com Ollama como backend padrão
 
-#### Package Managers
+#### Gerenciadores de Pacotes
 
 - [Pacman](https://archlinux.org/packages/extra/x86_64/ollama/)
 - [Homebrew](https://formulae.brew.sh/formula/ollama)
-- [Nix package](https://search.nixos.org/packages?show=ollama&from=0&size=50&sort=relevance&type=packages&query=ollama)
+- [Pacote Nix](https://search.nixos.org/packages?show=ollama&from=0&size=50&sort=relevance&type=packages&query=ollama)
 - [Helm Chart](https://artifacthub.io/packages/helm/ollama-helm/ollama)
 - [Gentoo](https://github.com/gentoo/guru/tree/master/app-misc/ollama)
 - [Flox](https://flox.dev/blog/ollama-part-one)
-- [Guix channel](https://codeberg.org/tusharhero/ollama-guix)
+- [Canal Guix](https://codeberg.org/tusharhero/ollama-guix)
