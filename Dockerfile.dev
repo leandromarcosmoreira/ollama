@@ -60,8 +60,24 @@ WORKDIR /app
 # Copy the binary from builder stage
 COPY --from=builder /build/ollama /app/ollama
 
+# Make sure the binary is executable
+RUN chmod +x /app/ollama
+
 # Copy source code for development
 COPY . .
+
+# Create entrypoint script to ensure NVIDIA support
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'echo "=== Ollama GPU-Only Container Startup ==="' >> /app/entrypoint.sh && \
+    echo 'echo "🚀 Forcing GPU-Only Mode..."' >> /app/entrypoint.sh && \
+    echo 'export CUDA_VISIBLE_DEVICES=0' >> /app/entrypoint.sh && \
+    echo 'export OLLAMA_GPU_OVERHEAD=1073741824' >> /app/entrypoint.sh && \
+    echo 'export OLLAMA_MAX_LOADED_MODELS=1' >> /app/entrypoint.sh && \
+    echo 'echo "🔍 Running GPU validation..."' >> /app/entrypoint.sh && \
+    echo '/app/validate-cuda.sh' >> /app/entrypoint.sh && \
+    echo 'echo "🎯 Starting Ollama in GPU-Only mode..."' >> /app/entrypoint.sh && \
+    echo 'exec "$@"' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
 
 # Set CUDA environment variables for GPU-only mode
 ENV CUDA_VISIBLE_DEVICES=0
@@ -111,22 +127,8 @@ RUN echo '#!/bin/bash' > /app/validate-cuda.sh && \
     echo 'echo "=== GPU Validation Complete ==="' >> /app/validate-cuda.sh && \
     chmod +x /app/validate-cuda.sh
 
-# Create entrypoint script to ensure NVIDIA support
-RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
-    echo 'echo "=== Ollama GPU-Only Container Startup ==="' >> /app/entrypoint.sh && \
-    echo 'echo "🚀 Forcing GPU-Only Mode..."' >> /app/entrypoint.sh && \
-    echo 'export CUDA_VISIBLE_DEVICES=0' >> /app/entrypoint.sh && \
-    echo 'export OLLAMA_GPU_OVERHEAD=1073741824' >> /app/entrypoint.sh && \
-    echo 'export OLLAMA_MAX_LOADED_MODELS=1' >> /app/entrypoint.sh && \
-    echo 'echo "🔍 Running GPU validation..."' >> /app/entrypoint.sh && \
-    echo '/app/validate-cuda.sh' >> /app/entrypoint.sh && \
-    echo 'echo "🎯 Starting Ollama in GPU-Only mode..."' >> /app/entrypoint.sh && \
-    echo 'exec "$@"' >> /app/entrypoint.sh && \
-    chmod +x /app/entrypoint.sh
-
 # Expose port
 EXPOSE 11434
 
-# Development command with air for hot reloading
-ENTRYPOINT ["/app/entrypoint.sh"]
-CMD ["air", "-c", ".air.toml"]
+# Simple development command without complex entrypoint
+CMD ["./ollama", "serve"]
