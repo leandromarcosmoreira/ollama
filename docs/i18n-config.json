@@ -1,0 +1,26 @@
+{
+  "languages": {
+    "en": {
+      "name": "English",
+      "flag": "🇺🇸",
+      "default": true
+    },
+    "es": {
+      "name": "Español",
+      "flag": "🇪🇸"
+    },
+    "pt": {
+      "name": "Português",
+      "flag": "🇧🇷"
+    }
+  },
+  "defaultLanguage": "en",
+  "fallbackLanguage": "en",
+  "structure": {
+    "docs": {
+      "en": "docs/en",
+      "es": "docs/es", 
+      "pt": "docs/pt"
+    }
+  }
+}

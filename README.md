@@ -130,7 +130,7 @@ print(response.message.content)
 ### JavaScript
 
 ```
-npm i ollama
+pnpm add ollama
 ```
 
 ```javascript

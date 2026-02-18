@@ -1,0 +1,132 @@
+# Build stage with Ubuntu for compatibility
+FROM nvidia/cuda:12.1.0-devel-ubuntu22.04 AS builder
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    cmake \
+    make \
+    git \
+    wget \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Go
+RUN wget -O go.tar.gz https://go.dev/dl/go1.25.0.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go.tar.gz \
+    && rm go.tar.gz
+
+ENV PATH=/usr/local/go/bin:$PATH
+
+WORKDIR /build
+
+# Copy go mod files
+COPY go.mod go.sum ./
+
+# Download dependencies
+RUN go mod download
+
+# Copy source code
+COPY . .
+
+# Build Ollama with explicit CUDA support for Ubuntu
+RUN CGO_ENABLED=1 \
+    CC=gcc \
+    CXX=g++ \
+    go build -ldflags="-s -w" -o ollama ./main.go
+
+# Production stage with CUDA runtime
+FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04
+
+# Install Go and runtime dependencies
+RUN apt-get update && apt-get install -y \
+    curl \
+    bash \
+    pciutils \
+    wget \
+    file \
+    && wget -O go.tar.gz https://go.dev/dl/go1.25.0.linux-amd64.tar.gz \
+    && tar -C /usr/local -xzf go.tar.gz \
+    && rm go.tar.gz \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install air for hot reloading
+RUN /usr/local/go/bin/go install github.com/air-verse/air@latest \
+    && export PATH=/root/go/bin:$PATH \
+    && echo 'export PATH=/root/go/bin:$PATH' >> /etc/profile
+
+WORKDIR /app
+
+# Copy the binary from builder stage
+COPY --from=builder /build/ollama /app/ollama
+
+# Copy source code for development
+COPY . .
+
+# Set CUDA environment variables for GPU-only mode
+ENV CUDA_VISIBLE_DEVICES=0
+ENV NVIDIA_VISIBLE_DEVICES=all
+ENV NVIDIA_DRIVER_CAPABILITIES=compute,utility
+ENV OLLAMA_GPU_OVERHEAD=1073741824
+ENV OLLAMA_MAX_LOADED_MODELS=1
+ENV OLLAMA_GPU_LAYERS=999
+ENV OLLAMA_FORCE_GPU=1
+ENV LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/cuda/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH
+ENV PATH=/usr/local/go/bin:/root/go/bin:/usr/local/cuda/bin:/usr/local/nvidia/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Create comprehensive CUDA validation script
+RUN echo '#!/bin/bash' > /app/validate-cuda.sh && \
+    echo 'echo "=== GPU-Only Mode Validation for Ollama ==="' >> /app/validate-cuda.sh && \
+    echo 'echo "1. Checking NVIDIA driver..."' >> /app/validate-cuda.sh && \
+    echo 'nvidia-smi || echo "❌ NVIDIA driver not accessible"' >> /app/validate-cuda.sh && \
+    echo 'echo "2. Checking CUDA runtime..."' >> /app/validate-cuda.sh && \
+    echo 'nvcc --version 2>/dev/null || echo "⚠ CUDA compiler not found (runtime-only)"' >> /app/validate-cuda.sh && \
+    echo 'echo "3. Checking GPU devices..."' >> /app/validate-cuda.sh && \
+    echo 'if ls /dev/nvidia* 1>/dev/null 2>&1; then' >> /app/validate-cuda.sh && \
+    echo '    echo "✅ GPU devices found:"' >> /app/validate-cuda.sh && \
+    echo '    ls -la /dev/nvidia* | grep nvidia0' >> /app/validate-cuda.sh && \
+    echo 'else' >> /app/validate-cuda.sh && \
+    echo '    echo "❌ GPU devices not found"' >> /app/validate-cuda.sh && \
+    echo 'fi' >> /app/validate-cuda.sh && \
+    echo 'echo "4. Testing Ollama GPU detection..."' >> /app/validate-cuda.sh && \
+    echo 'echo "Starting Ollama server to check GPU detection..."' >> /app/validate-cuda.sh && \
+    echo './ollama serve > /tmp/ollama.log 2>&1 &' >> /app/validate-cuda.sh && \
+    echo 'sleep 12' >> /app/validate-cuda.sh && \
+    echo 'echo "=== GPU Detection Results ==="' >> /app/validate-cuda.sh && \
+    echo 'if grep -q "gpu\|cuda\|vram\|GPU" /tmp/ollama.log; then' >> /app/validate-cuda.sh && \
+    echo '    echo "✅ GPU DETECTADA:"' >> /app/validate-cuda.sh && \
+    echo '    grep -i "gpu\|cuda\|vram" /tmp/ollama.log | head -3' >> /app/validate-cuda.sh && \
+    echo 'else' >> /app/validate-cuda.sh && \
+    echo '    echo "⚠ GPU não detectada, verificando CPU..."' >> /app/validate-cuda.sh && \
+    echo '    grep "inference compute" /tmp/ollama.log | head -2' >> /app/validate-cuda.sh && \
+    echo 'fi' >> /app/validate-cuda.sh && \
+    echo 'echo "=== Server Status ==="' >> /app/validate-cuda.sh && \
+    echo 'if curl -s http://localhost:11434/api/version >/dev/null 2>&1; then' >> /app/validate-cuda.sh && \
+    echo '    echo "✅ Servidor respondendo:"' >> /app/validate-cuda.sh && \
+    echo '    curl -s http://localhost:11434/api/version' >> /app/validate-cuda.sh && \
+    echo 'else' >> /app/validate-cuda.sh && \
+    echo '    echo "❌ Servidor não respondendo"' >> /app/validate-cuda.sh && \
+    echo 'fi' >> /app/validate-cuda.sh && \
+    echo 'pkill -f ollama || true' >> /app/validate-cuda.sh && \
+    echo 'echo "=== GPU Validation Complete ==="' >> /app/validate-cuda.sh && \
+    chmod +x /app/validate-cuda.sh
+
+# Create entrypoint script to ensure NVIDIA support
+RUN echo '#!/bin/sh' > /app/entrypoint.sh && \
+    echo 'echo "=== Ollama GPU-Only Container Startup ==="' >> /app/entrypoint.sh && \
+    echo 'echo "🚀 Forcing GPU-Only Mode..."' >> /app/entrypoint.sh && \
+    echo 'export CUDA_VISIBLE_DEVICES=0' >> /app/entrypoint.sh && \
+    echo 'export OLLAMA_GPU_OVERHEAD=1073741824' >> /app/entrypoint.sh && \
+    echo 'export OLLAMA_MAX_LOADED_MODELS=1' >> /app/entrypoint.sh && \
+    echo 'echo "🔍 Running GPU validation..."' >> /app/entrypoint.sh && \
+    echo '/app/validate-cuda.sh' >> /app/entrypoint.sh && \
+    echo 'echo "🎯 Starting Ollama in GPU-Only mode..."' >> /app/entrypoint.sh && \
+    echo 'exec "$@"' >> /app/entrypoint.sh && \
+    chmod +x /app/entrypoint.sh
+
+# Expose port
+EXPOSE 11434
+
+# Development command with air for hot reloading
+ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["air", "-c", ".air.toml"]
